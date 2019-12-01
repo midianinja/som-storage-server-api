@@ -20,7 +20,7 @@ let app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/insta/media/:username', getUserLastPics);
+app.get('/insta/photos/:username', getUserLastPics);
 app.get('/insta/profile/:username', getUserProfilePic);
 app.post('/image/upload', uploadImage);
 app.post('/song/upload', uploadSong);
