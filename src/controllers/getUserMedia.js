@@ -21,7 +21,9 @@ export const getUserLastPics = async (req, res) => {
 };
 
 export const getUserProfilePic = async (req, res) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox']
+ });
   const page = await browser.newPage();
 
   await page.goto(`https://instagram.com/${req.params.username}/`);

@@ -26,9 +26,9 @@ app.post('/image/upload', uploadImage);
 app.post('/song/upload', uploadSong);
 app.post('/document/upload', uploadDocument);
 
-app.listen(8082, (err) => {
+app.listen(process.env.PORT || 8080, (err) => {
   if (err) console.log(err);
-  else console.log(`Server Running - Listening to port ${8082}`);
+  else console.log(`Server Running - Listening to port ${8080}`);
 });
 
 

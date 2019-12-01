@@ -1,5 +1,5 @@
 {
-  "name": "instaPoc",
+  "name": "som-storage-server-api",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -16,9 +16,7 @@
     "imagemin-pngquant": "^7.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "puppeteer": "^1.17.0"
-  },
-  "devDependencies": {
+    "puppeteer": "^1.17.0",
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
     "@babel/node": "^7.2.2",
@@ -27,5 +25,7 @@
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/runtime": "^7.4.2"
+  },
+  "devDependencies": {
   }
 }
