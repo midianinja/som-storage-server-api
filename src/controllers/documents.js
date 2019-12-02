@@ -13,16 +13,17 @@ import s3 from '../utils/aws.repository';
   * @param {string} wirecardId
   */
 export const upload = async (req, res) => {
-  const { file, id, fileName } = req.body;
-  console.log('req.body:', req.body);
+  const myData = JSON.parse(JSON.stringify(req.body).slice(1, -4));
+  const { file, id, fileName } = JSON.parse(myData);
   const filename = fileName || `${new Date().getTime()}.pdf`;
-  console.log('filename:', filename)
+
   const data = file.replace(/^data:application\/pdf+;base64,/, '');
   console.log('data:', data)
   const key = () => `documents/${id}/pdf/${filename}`;
 
   try {
     const base64Data = Buffer.from(data, 'base64');
+    console.log('base64Data:', base64Data);
     const documentResponse = await s3.upload(base64Data, `${key()}.mp3`, 'application/pdf', process.env.BUCKET_NAME);
     res.status(200).send({
       data: {

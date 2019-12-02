@@ -18,7 +18,11 @@ import {
 let app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(express.json({ extended: true, limit: '50mb'}));
+app.use(express.urlencoded({ extended: true, limit: '50mb'}));
+app.use(cors({
+  origin: 'https://som.vc'
+}));
 
 app.get('/insta/photos/:username', getUserLastPics);
 app.get('/insta/profile/:username', getUserProfilePic);

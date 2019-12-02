@@ -16,14 +16,20 @@ import s3 from '../utils/aws.repository';
   * @param {string} wirecardId
   */
 export const upload = async (req, res) => {
-  const { file, id } = req.body;
+  const myData = JSON.parse(JSON.stringify(req.body).slice(1, -4));
+  console.log('myData:', myData)
+  console.log('myData:', typeof myData)
+  const { file, id } = JSON.parse(myData);
+  console.log('file:', file);
   const filename = `${new Date().getTime()}`;
   const data = file.replace(/^data:audio\/mp3+;base64,/, '');
   const key = () => `songs/${id}/mp3/${filename}`;
 
   try {
     const base64Data = Buffer.from(data, 'base64');
+    console.log('base64Data:', base64Data);
     const originalResponse = await s3.upload(base64Data, `${key()}.mp3`, 'audio/mp3', process.env.BUCKET_NAME);
+    console.log('originalResponse:', originalResponse);
     return res.status(200).send({
       data: {
         link: originalResponse.Location,

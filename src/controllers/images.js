@@ -16,10 +16,12 @@ import s3 from '../utils/aws.repository';
   * @param {string} wirecardId
   */
 export const upload = async (req, res) => {
+  // const myData = JSON.parse(JSON.stringify(req.body).slice(1, -1));
   const { file, id } = req.body;
+  console.log('file:', file);
+  console.log('id:', id);
   const filename = `${new Date().getTime()}`;
-  // const stgVariables = event.stageVariables || {};
-  const data = file.replace(/^data:image\/\w+;base64,/, '');
+  const data = JSON.parse(file).data.replace(/^data:image\/\w+;base64,/, '');
   const base64Data = Buffer.from(data, 'base64');
   const rootDir = '/tmp';
   const originalTmpPath = `${rootDir}/originals/`;
@@ -96,7 +98,7 @@ export const upload = async (req, res) => {
   }
 
   console.log('urls: ', urls);
-  return res.status(500).send({
+  return res.status(200).send({
     data: {
       urls,
     },
