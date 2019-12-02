@@ -16,10 +16,7 @@ import s3 from '../utils/aws.repository';
   * @param {string} wirecardId
   */
 export const upload = async (req, res) => {
-  const myData = JSON.parse(JSON.stringify(req.body).slice(1, -4));
-  console.log('myData:', myData)
-  console.log('myData:', typeof myData)
-  const { file, id } = JSON.parse(myData);
+  const { file, id } = JSON.parse(req.body);
   console.log('file:', file);
   const filename = `${new Date().getTime()}`;
   const data = file.replace(/^data:audio\/mp3+;base64,/, '');

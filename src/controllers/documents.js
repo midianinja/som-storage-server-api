@@ -13,8 +13,7 @@ import s3 from '../utils/aws.repository';
   * @param {string} wirecardId
   */
 export const upload = async (req, res) => {
-  const myData = JSON.parse(JSON.stringify(req.body).slice(1, -4));
-  const { file, id, fileName } = JSON.parse(myData);
+  const { file, id, fileName } = req.body;
   const filename = fileName || `${new Date().getTime()}.pdf`;
 
   const data = file.replace(/^data:application\/pdf+;base64,/, '');
