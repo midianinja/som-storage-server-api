@@ -20,7 +20,7 @@ let app = express();
 app.use(bodyParser.json({ limit: '15000kb'}));
 app.use(bodyParser.urlencoded({ limit: '15000kb'}));
 app.use(cors({
-  origin: 'https://som.vc'
+  origin: 'https://dev.som.vc'
 }));
 
 app.get('/insta/photos/:username', getUserLastPics);
