@@ -18,7 +18,7 @@ import {
 let app = express();
 
 app.use(bodyParser.json({ limit: '15000kb'}));
-app.use(bodyParser.urle                                                                                                                                                                                                                                                                 ncoded({ limit: '15000kb'}));
+app.use(bodyParser.urlencoded({ limit: '15000kb'}));
 app.use(cors({
   origin: 'https://som.vc'
 }));
