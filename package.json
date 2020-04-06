@@ -16,9 +16,7 @@
     "imagemin": "^6.1.0",
     "imagemin-jpeg-recompress": "^6.0.0",
     "imagemin-pngquant": "^7.0.0",
-    "puppeteer": "^1.17.0"
-  },
-  "devDependencies": {
+    "puppeteer": "^1.17.0",
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.2.2",

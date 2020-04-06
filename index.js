@@ -23,15 +23,10 @@ let app = express();
 app.use(bodyParser.json({ limit: '15000kb'}));
 app.use(bodyParser.urlencoded({ limit: '15000kb'}));
 app.use(cors({
-  origin: process.env.NODE_ENV === 'local' ? '*' : 'https://som.vc'
+  origin: '*'
 }));
 
-app.get('/insta/photos/:username', getUserLastPics);
-app.get('/insta/profile/:username', getUserProfilePic);
-app.post('/image/upload', uploadImage);
-app.post('/song/upload', uploadSong);
-app.post('/document/upload', uploadDocument);
-app.post('/500-cities/image/upload', upload500Cities);
+app.post('/image/upload', upload500Cities);
 
 app.listen(process.env.PORT || 8080, (err) => {
   if (err) console.log(err);
