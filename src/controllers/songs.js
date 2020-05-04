@@ -20,26 +20,30 @@ export const upload = async (req, res) => {
   console.log('file:', file);
   const filename = `${new Date().getTime()}`;
   const data = file.replace(/^data:audio\/mp3+;base64,/, '');
-  const key = () => `songs/${id}/mp3/${filename}`;
+  const key = () => `songs/${id}/mp3`;
 
   try {
     const base64Data = Buffer.from(data, 'base64');
     console.log('base64Data:', base64Data);
-    const originalResponse = await s3.upload(base64Data, `${key()}.mp3`, 'audio/mp3', process.env.BUCKET_NAME);
+    const originalResponse = await s3.upload(base64Data, `${key()}/${md5(base64Data)}-${filename}.mp3`, 'audio/mp3', process.env.BUCKET_NAME);
     console.log('originalResponse:', originalResponse);
-    return res.status(200).send({
-      data: {
-        link: originalResponse.Location,
-      },
-    });
+    return res.status(200)
+      .setHeader('X-Content-Type-Options', 'nosniff')
+      .send({
+        data: {
+          link: originalResponse.Location,
+        },
+      });
   } catch (err) {
     console.log('Orifinal image error', err);
-    return res.status(500).send({
-      error: {
-        type: 'upload_song_error',
-        info: err,
-      },
-    });
+    return res.status(500)
+      .setHeader('X-Content-Type-Options', 'nosniff')
+      .send({
+        error: {
+          type: 'upload_song_error',
+          info: err,
+        },
+      });
   }
 };
 
