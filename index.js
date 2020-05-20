@@ -17,7 +17,14 @@ let app = express();
 app.use(bodyParser.json({ limit: '15000kb'}));
 app.use(bodyParser.urlencoded({ limit: '15000kb', extended: true }));
 app.use(cors({
-  origin: 'https://dev.som.vc'
+  origin: (origin, callback) => {
+    console.log('origin:', origin)
+    if (/^https:\/\/\w{0,}.som\.vc$/gm.test(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }));
 
 app.post('/image/upload', uploadImage);
