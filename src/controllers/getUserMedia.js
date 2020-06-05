@@ -11,7 +11,7 @@ export const getUserLastPics = async (req, res) => {
   
     const imageLinks = await page.evaluate(() => {
       const links = [];
-      const elements = document.querySelectorAll('a > div > div > img');
+      const elements = document.querySelectorAll('a div div img');
       for(const el of elements) {
         links.push(el.src)
       }
