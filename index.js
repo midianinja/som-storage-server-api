@@ -1,6 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 import cors from 'cors';
+
+dotenv.config()
 
 import {
   getUserLastPics, getUserProfilePic,
@@ -24,11 +27,14 @@ const allowedDomains = [
   'https://www.som.vc',
   'https://som.vc',
   'https://dev.som.vc',
-  'https://main.dkeswowbvzjm7.amplifyapp.com/wall',
+  'https://main.dkeswowbvzjm7.amplifyapp.com',
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
+    console.log('array ------', allowedDomains);
+    console.log('origin -------', origin);
+
     if (allowedDomains.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
