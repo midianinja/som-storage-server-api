@@ -31,7 +31,7 @@ const allowedDomains = [
 ];
 
 app.use(cors((req, callback) => {
-  console.log('req --------', req);
+  console.log('req --------', req.header);
   console.log('origin -------', req.header('Origin'));
   
   if (allowedDomains.indexOf(req.header('Origin')) !== -1) {
