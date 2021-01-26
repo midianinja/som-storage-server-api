@@ -19,8 +19,22 @@ let app = express();
 
 app.use(bodyParser.json({ limit: '15000kb'}));
 app.use(bodyParser.urlencoded({ limit: '15000kb'}));
+
+const allowedDomains = [
+  'https://www.som.vc',
+  'https://som.vc',
+  'https://dev.som.vc',
+  'https://main.dkeswowbvzjm7.amplifyapp.com/wall',
+];
+
 app.use(cors({
-  origin: 'https://dev.som.vc'
+  origin: (origin, callback) => {
+    if (allowedDomains.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
 }));
 
 app.get('/insta/photos/:username', getUserLastPics);
