@@ -31,12 +31,11 @@ const allowedDomains = [
 ];
 
 app.use(cors((req, callback) => {
-    console.log('origin -------', req.header('Origin'));
-    if (allowedDomains.indexOf(req.header('Origin')) !== -1) {
-      callback(null, { origin: true })
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+  console.log('origin -------', req.header('Origin'));
+  if (allowedDomains.indexOf(req.header('Origin')) !== -1) {
+    callback(null, { origin: true })
+  } else {
+    callback(new Error('Not allowed by CORS'))
   }
 });
 
