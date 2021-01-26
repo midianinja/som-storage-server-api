@@ -30,18 +30,15 @@ const allowedDomains = [
   'https://main.dkeswowbvzjm7.amplifyapp.com',
 ];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    console.log('array ------', allowedDomains);
-    console.log('origin -------', origin);
-
-    if (allowedDomains.indexOf(origin) !== -1) {
-      callback(null, true)
+app.use(cors((req, callback) => {
+    console.log('origin -------', req.header('Origin'));
+    if (allowedDomains.indexOf(req.header('Origin')) !== -1) {
+      callback(null, { origin: true })
     } else {
       callback(new Error('Not allowed by CORS'))
     }
-  },
-}));
+  }
+});
 
 app.get('/insta/photos/:username', getUserLastPics);
 app.get('/insta/profile/:username', getUserProfilePic);
