@@ -37,7 +37,7 @@ app.use(cors((req, callback) => {
   } else {
     callback(new Error('Not allowed by CORS'))
   }
-});
+}));
 
 app.get('/insta/photos/:username', getUserLastPics);
 app.get('/insta/profile/:username', getUserProfilePic);
