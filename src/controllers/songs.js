@@ -6,20 +6,17 @@ import s3 from '../utils/aws.repository';
 /**
   * @function upload
   *
-  * That function delete an credit card on wirecard api.
-  * That action is irreversible.
-  * For use that function make a GET request to
-  *   /delete-credit-card?wirecardId=CRC-5TUWT121PNZY,
-  *   the wirecardId in query, is the credit card id in Wirecard
-  *
-  * @method GET
-  * @param {string} wirecardId
+  * That function make upload of an audio .
+  * For use that function make a POST request to /song/upload
+  * @method POST
+  * @param {base64Data} file
+  * @param {string} id
   */
 export const upload = async (req, res) => {
   const { file, id } = req.body;
-  console.log('file:', file);
+  console.log('🚀 ~ file: songs.js ~ line 17 ~ upload ~ file', file);
   const filename = `${new Date().getTime()}`;
-  const data = file.replace(/^data:audio\/mp3+;base64,/, '');
+  const data = file.replace(/^data:audio\/mp3+;base64,/, '').replace(/^data:audio\/mpeg+;base64,/, '');
   const key = () => `songs/${id}/mp3/${filename}`;
 
   try {

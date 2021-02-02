@@ -2,9 +2,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
+<<<<<<< Updated upstream
 
 dotenv.config()
 
+=======
+import dotenv from 'dotenv'
+>>>>>>> Stashed changes
 import {
   getUserLastPics, getUserProfilePic,
 } from './src/controllers/getUserMedia';
@@ -18,10 +22,12 @@ import {
   upload as uploadSong
 } from './src/controllers/songs'
 
+dotenv.config();
 let app = express();
 
 app.use(bodyParser.json({ limit: '15000kb'}));
 app.use(bodyParser.urlencoded({ limit: '15000kb'}));
+<<<<<<< Updated upstream
 
 const allowedDomains = [
   'https://www.som.vc',
@@ -38,6 +44,10 @@ app.use(cors((req, callback) => {
   } else {
     callback(new Error('Not allowed by CORS'));
   }
+=======
+app.use(cors({
+  origin: '*'
+>>>>>>> Stashed changes
 }));
 
 app.get('/insta/photos/:username', getUserLastPics);

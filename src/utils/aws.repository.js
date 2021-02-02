@@ -2,6 +2,8 @@ import AWS from 'aws-sdk';
 
 const s3 = new AWS.S3({
   signatureVersion: 'v4',
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_ACCESS_KEY_ID,
 });
 /**
   * upload - That function upload file to aws s3
@@ -12,7 +14,7 @@ const s3 = new AWS.S3({
   * @param {string} contentType it's file content type
   * @returns {promise} with err or file storage data
   */
-const upload = (body, key, contentType = null, Bucket = 'som-dev-storage') => {
+const upload = (body, key, contentType = null, Bucket = 'dev-som-storage') => {
   console.log('Bucket: ', Bucket);
   const params = {
     Body: body,

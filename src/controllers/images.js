@@ -6,22 +6,18 @@ import s3 from '../utils/aws.repository';
 /**
   * @function upload
   *
-  * That function delete an credit card on wirecard api.
-  * That action is irreversible.
-  * For use that function make a GET request to
-  *   /delete-credit-card?wirecardId=CRC-5TUWT121PNZY,
-  *   the wirecardId in query, is the credit card id in Wirecard
+ * That function make upload of a image .
+  * For use that function make a POST request to /image/upload
   *
-  * @method GET
-  * @param {string} wirecardId
+  * @method POST
+  * @param {base64Data} file
+  * @param {string} id
   */
 export const upload = async (req, res) => {
   // const myData = JSON.parse(JSON.stringify(req.body).slice(1, -1));
   const { file, id } = req.body;
-  console.log('file:', file);
-  console.log('id:', id);
   const filename = `${new Date().getTime()}`;
-  const data = JSON.parse(file).data.replace(/^data:image\/\w+;base64,/, '');
+  const data = file.replace(/^data:image\/\w+;base64,/, '');
   const base64Data = Buffer.from(data, 'base64');
   const rootDir = '/tmp';
   const originalTmpPath = `${rootDir}/originals/`;

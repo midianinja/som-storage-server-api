@@ -5,6 +5,4 @@ node_modules/
 !.elasticbeanstalk/*.global.yml
 
 .env
-.env.production
-.env.development
-
+.env.*
