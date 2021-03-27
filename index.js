@@ -40,7 +40,7 @@ const corsOptions = {
   },
 }
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -52,7 +52,7 @@ app.use(cors((req, callback) => {
   
   // if (allowedDomains.indexOf(req.header('origin')) !== -1) {
     console.log('🚀 ~ file: index.js ~ line 48 ~ app.use ~', req.header('origin'));
-    callback(null, { origin: true });
+    callback();
   // } else {
   //   callback(new Error('Not allowed by CORS'));
   // }
