@@ -21,7 +21,7 @@ import {
 dotenv.config();
 let app = express();
 
-app.use(bodyParser.json({ limit: '15000kb'}));
+app.use(bodyParser.json({ limit: '15000kb', type: 'application/json' }));
 app.use(bodyParser.urlencoded({ limit: '15000kb'}));
 
 const allowedDomains = [
@@ -31,19 +31,25 @@ const allowedDomains = [
   'https://main.dkeswowbvzjm7.amplifyapp.com',
 ];
 const corsOptions = {
-  origin: (req, callback) => {
-    console.log('🚀 ~ file: index.js ~ line 38 ~ app.use ~ req', req);
-    console.log('origin -------', req.header('origin'));
-    
-    if (allowedDomains.indexOf(req.header('origin')) !== -1) {
-      callback(null, { origin: true });
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('Not allowed by CORS'))
     }
   },
 }
 
-app.use(cors(corsOptions));
+app.use(cors((req, callback) => {
+  console.log('🚀 ~ file: index.js ~ line 38 ~ app.use ~ req', req);
+  console.log('origin -------', req.referer);
+  
+  if (allowedDomains.indexOf(req.header('origin')) !== -1) {
+    callback(null, { origin: true });
+  } else {
+    callback(new Error('Not allowed by CORS'));
+  }
+}));
 
 app.get('/insta/photos/:username', getUserLastPics);
 app.get('/insta/profile/:username', getUserProfilePic);
