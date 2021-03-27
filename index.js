@@ -46,17 +46,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors(/* (req, callback) => {
+app.use(cors((req, callback) => {
   console.log('🚀 ~ file: index.js ~ line 38 ~ app.use ~ req', req);
-  console.log('origin -------', req.referer);
+  console.log('origin req.get -------', req.get('origin'));
+  console.log('origin idativista.org -------', req.header('origin'));
   
-  // if (allowedDomains.indexOf(req.header('origin')) !== -1) {
+  if (allowedDomains.indexOf(req.header('origin')) !== -1) {
     console.log('🚀 ~ file: index.js ~ line 48 ~ app.use ~', req.header('origin'));
     callback();
-  // } else {
-  //   callback(new Error('Not allowed by CORS'));
-  // }
-} */));
+  } else {
+    callback(new Error('Not allowed by CORS'));
+  }
+}));
 
 app.get('/insta/photos/:username', getUserLastPics);
 app.get('/insta/profile/:username', getUserProfilePic);
