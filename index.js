@@ -40,6 +40,12 @@ const corsOptions = {
   },
 }
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(cors((req, callback) => {
   console.log('🚀 ~ file: index.js ~ line 38 ~ app.use ~ req', req);
   console.log('origin -------', req.referer);
