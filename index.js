@@ -44,11 +44,12 @@ app.use(cors((req, callback) => {
   console.log('🚀 ~ file: index.js ~ line 38 ~ app.use ~ req', req);
   console.log('origin -------', req.referer);
   
-  if (allowedDomains.indexOf(req.header('origin')) !== -1) {
+  // if (allowedDomains.indexOf(req.header('origin')) !== -1) {
+    console.log('🚀 ~ file: index.js ~ line 48 ~ app.use ~', req.header('origin'));
     callback(null, { origin: true });
-  } else {
-    callback(new Error('Not allowed by CORS'));
-  }
+  // } else {
+  //   callback(new Error('Not allowed by CORS'));
+  // }
 }));
 
 app.get('/insta/photos/:username', getUserLastPics);
