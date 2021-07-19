@@ -21,7 +21,7 @@ import {
 dotenv.config();
 let app = express();
 
-app.use(bodyParser.json({ limit: '15000kb'}));
+app.use(bodyParser.json({ limit: '15000kb', type: 'application/json' }));
 app.use(bodyParser.urlencoded({ limit: '15000kb'}));
 
 const allowedDomains = [
@@ -32,12 +32,26 @@ const allowedDomains = [
   'https://main.dkeswowbvzjm7.amplifyapp.com',
   'http://localhost:3001',
 ];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+}
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use(cors((req, callback) => {
-  console.log('origin -------', req.header('origin'));
-  
   if (allowedDomains.indexOf(req.header('origin')) !== -1) {
-    callback(null, { origin: true });
+    console.log('🚀 ~ file: index.js ~ line 48 ~ app.use ~', req.header('origin'));
+    callback();
   } else {
     callback(new Error('Not allowed by CORS'));
   }
