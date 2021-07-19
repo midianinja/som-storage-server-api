@@ -28,7 +28,9 @@ const allowedDomains = [
   'https://www.som.vc',
   'https://som.vc',
   'https://dev.som.vc',
+  'https://development.som.vc',
   'https://main.dkeswowbvzjm7.amplifyapp.com',
+  'http://localhost:3001',
 ];
 
 app.use(cors((req, callback) => {
